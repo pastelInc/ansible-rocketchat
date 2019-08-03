@@ -1,0 +1,23 @@
+---
+- name: Apply the RocketChat.Server role to all chat_servers
+  hosts: chat_servers
+  roles:
+    - blackstar257.selinux
+    - mongodb
+    - RocketChat.Server
+    - geerlingguy.firewall
+  vars:
+    selinux_state: disabled
+    mongodb_version: "3.4"
+    mongodb_repo_baseurl: "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/{{ mongodb_version }}/x86_64/"
+    mongodb_repo_gpgcheck: yes
+    mongodb_repo_gpgkey: "https://www.mongodb.org/static/pgp/server-{{ mongodb_version }}.asc"
+    mongodb_packages:
+      - mongodb-org
+      - mongodb-org-server
+    rocket_chat_include_mongodb: false
+    rocket_chat_tarball_sha256sum: 080a89a92d6eddecc09bcf2b8debe1b80ac15359b07838e205b11b9294d5cfb4
+    firewall_allowed_tcp_ports:
+      - "22"
+      - "80"
+      - "443"

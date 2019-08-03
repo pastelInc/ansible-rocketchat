@@ -1,0 +1,6 @@
+- src: blackstar257.selinux
+- src: lesmyrmidons.mongodb
+- src: RocketChat.Server
+  version: v2.2.4
+- src: geerlingguy.firewall
+  version: 2.2.0
